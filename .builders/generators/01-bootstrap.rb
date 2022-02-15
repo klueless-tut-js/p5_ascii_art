@@ -12,6 +12,7 @@ KManager.action :bootstrap do
         application_description:    'Ascii Art using p5.js',
         author:                     'David Cruwys',
         author_email:               'david@ideasmen.com.au',
+        initial_semver:             '1.0.0',
         main_story:                 '',
         copyright_date:             '2022'
       )
@@ -27,7 +28,7 @@ KManager.action :bootstrap do
         # run_command('git init')
       end
       .blueprint(
-        active: true,
+        active: false,
         name: :bin_hook,
         description: 'initialize repository',
         on_exist: :write) do
@@ -43,7 +44,7 @@ KManager.action :bootstrap do
         run_command("gh repo edit -d \"#{dom[:application_description]}\"")
       end
       .package_json(
-        active: false,
+        active: true,
         name: :package_json,
         description: 'Set up the package.json file for semantic versioning'
       ) do
@@ -51,11 +52,12 @@ KManager.action :bootstrap do
           .add('package.json', dom: dom)
           .play_actions
 
-        # self
-        #   .add_script('xxx', 'xxx')
-        #   .sort
-        #   .development
-        #   .npm_add_group('xxx')
+        self
+          .sort
+          .development
+          .npm_install('p5')
+          # .npm_add_group('xxx')
+          # .add_script('xxx', 'xxx')
 
         # run_command("git add .; git commit -m 'chore: #{self.options.description.downcase}'; git push")
       end

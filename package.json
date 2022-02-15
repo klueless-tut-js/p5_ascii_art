@@ -1,0 +1,8 @@
+{
+  "name": "p5_ascii_art",
+  "version": "1.0.0",
+  "description": "Ascii Art using p5.js",
+  "devDependencies": {
+    "p5": "^1.4.1"
+  }
+}
